@@ -29,17 +29,16 @@ InputState::InputState()
 											{InputCategory::pad , PAD_INPUT_RIGHT} };//右
 
 	m_inputMapTable[InputType::leftroll] = {	{InputCategory::keybd , KEY_INPUT_Z},
-												{InputCategory::pad , PAD_INPUT_A} };//
+												{InputCategory::pad , PAD_INPUT_A} };
 
 	m_inputMapTable[InputType::rightroll] = {	{InputCategory::keybd , KEY_INPUT_X},
-												{InputCategory::pad , PAD_INPUT_B} };//
+												{InputCategory::pad , PAD_INPUT_B} };
 
 	//入力タイプの名前テーブルを作る
 	m_inputNameTable[InputType::next] = L"next";
 	m_inputNameTable[InputType::prev] = L"prev";
 	m_inputNameTable[InputType::pause] = L"pause";
 	m_inputNameTable[InputType::keyconf] = L"keyconf";
-	m_inputNameTable[InputType::gamestart] = L"gamestart";
 
 	m_currentInput.resize(static_cast<int>(InputType::max));
 	m_lastInput.resize(static_cast<int>(InputType::max));
