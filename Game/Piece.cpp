@@ -243,17 +243,17 @@ void Piece::DropLine()
 	for (int y = kFieldHeight + kFieldFloor; y >= kFieldSpase; y--)
 	{
 		//ˆê—ñ‹ó”’‚©‚Ç‚¤‚©‚ðŠm”F
-		int deleteOk = 0;
+		int pieceCount = 0;
 		for (int x = kFieldWidth + kFieldWall; x >= kFieldWall; x--)
 		{
 			if (m_field[y][x] == SPASE)
 			{
-				deleteOk++;
+				pieceCount++;
 			}
 		}
 
 		//ˆê—ñ‹ó”’‚¾‚Á‚½‚ç
-		if (deleteOk == kFieldWidth)
+		if (pieceCount == kFieldWidth)
 		{
 			for (int x = kFieldWidth + kFieldWall; x >= kFieldWall; x--)
 			{
