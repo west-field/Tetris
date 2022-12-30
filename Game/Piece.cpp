@@ -228,18 +228,10 @@ void Piece::DeleteLine()
 			{
 				m_field[y][x] = SPASE;
 			}
+			m_isDeleteLine = true;
 		}
 	}
 	
-	for (int y = 1; y <= kFieldHeightMax - 2; y++)
-	{
-		if (m_deleteLine[y] == true)
-		{
-			m_isDeleteLine = true;
-			break;
-		}
-	}
-
 	if (m_isDeleteLine)
 	{
 		m_updateFunc = &Piece::DeleteLineUpdate;
@@ -261,7 +253,7 @@ void Piece::DropLine()
 		}
 
 		//ˆê—ñ‹ó”’‚¾‚Á‚½‚ç
-		if (deleteOk >= kFieldWidth)
+		if (deleteOk == kFieldWidth)
 		{
 			for (int x = kFieldWidth + kFieldWall; x >= kFieldWall; x--)
 			{
