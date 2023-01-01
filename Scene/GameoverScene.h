@@ -7,9 +7,7 @@
 class GameoverScene : public Scene
 {
 private:
-    //int m_gameoverH = -1;
-    
-    unsigned int m_fadeColor = 0xff0000;//フェードの色（赤
+    unsigned int m_fadeColor = 0x000000;//フェードの色（黒
 
     void FadeInUpdat(const InputState& input);
     void NormalUpdat(const InputState& input);
