@@ -38,6 +38,8 @@ Piece::Piece():m_updateFunc(&Piece::NomalUpdate)
 	m_nextMinoType = randNum % TypeMax;
 	m_nextMinoX = m_startPosX + kPieceSize * kFieldWidthMax + kPieceSize * 3;
 	m_nextMinoY = m_startPosY + kPieceSize * 3;
+
+	resetMino();
 }
 
 Piece::~Piece()
@@ -127,7 +129,6 @@ void Piece::NomalUpdate(const InputState& input)
 			m_moveTime = kMoveWaitTime;
 		}
 	}
-//Åö	
 	if (--m_rollTime <= 0)
 	{
 		//ç∂Ç…âÒì]
@@ -172,7 +173,7 @@ void Piece::NomalUpdate(const InputState& input)
 		m_dropTime = kDropWaitTime;
 	}
 }
-//Åö
+
 void Piece::DeleteLineUpdate(const InputState& input)
 {
 	if (--m_deleteTime <= 0)
@@ -202,13 +203,13 @@ void Piece::PieceToField()
 		}
 	}
 }
-//ÅöÉeÉgÉäÉ~ÉmÇ™àÍóÒÇªÇÎÇ¡ÇƒÇ¢ÇΩÇÁè¡ãéÇ∑ÇÈ
+
 void Piece::DeleteLine()
 {
 	//àÍóÒè¡ÇπÇÈèÍèäÇ™Ç†ÇÈÇ©
-	for (int y = 1; y <= kFieldHeightMax - 2; y++)
+	for (int y = kFieldSpase; y <= kFieldHeight + kFieldFloor; y++)
 	{
-		for (int x = 1; x <= kFieldWidthMax - 2; x++)
+		for (int x = kFieldWall; x <= kFieldWidth; x++)
 		{
 			if (m_field[y][x] == SPASE)
 			{
@@ -220,11 +221,13 @@ void Piece::DeleteLine()
 	}
 
 	//ÉeÉgÉäÉ~ÉmÇè¡Ç∑
-	for (int y = 1; y <= kFieldHeightMax - 2; y++)
+	//0Å`22ÇÃì‡ÇÃ2Å`21
+	for (int y = kFieldSpase; y <= kFieldHeight + kFieldFloor; y++)
 	{
 		if (m_deleteLine[y] == true)
 		{
-			for (int x = 1; x <= kFieldWidthMax - 2; x++)
+			//0Å`11ÇÃì‡ÇÃ1Å`10
+			for (int x = kFieldWall; x <= kFieldWidth; x++)
 			{
 				m_field[y][x] = SPASE;
 			}
@@ -237,14 +240,16 @@ void Piece::DeleteLine()
 		m_updateFunc = &Piece::DeleteLineUpdate;
 	}
 }
-//ÅöÉeÉgÉäÉ~ÉmÇàÍóÒè¡ÇµÇΩå„óÒÇâ∫Ç…óéÇ∆Ç∑
+
 void Piece::DropLine()
 {
+	//0Å`22ÇÃì‡ÇÃ2Å`21
 	for (int y = kFieldHeight + kFieldFloor; y >= kFieldSpase; y--)
 	{
 		//àÍóÒãÛîíÇ©Ç«Ç§Ç©ÇämîF
 		int pieceCount = 0;
-		for (int x = kFieldWidth + kFieldWall; x >= kFieldWall; x--)
+		//0Å`11ÇÃì‡ÇÃ1Å`10
+		for (int x = kFieldWidth; x >= kFieldWall; x--)
 		{
 			if (m_field[y][x] == SPASE)
 			{
@@ -253,9 +258,9 @@ void Piece::DropLine()
 		}
 
 		//àÍóÒãÛîíÇæÇ¡ÇΩÇÁ
-		if (pieceCount == kFieldWidth)
+		if (pieceCount >= kFieldWidth)
 		{
-			for (int x = kFieldWidth + kFieldWall; x >= kFieldWall; x--)
+			for (int x = kFieldWidth; x >= kFieldWall; x--)
 			{
 				//è„Ç…Ç†ÇÈÉsÅ[ÉXÇâ∫Ç…óéÇ∆Ç∑
 				if (m_field[y - 1][x] != SPASE)
