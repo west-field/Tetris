@@ -19,9 +19,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{c7745f0c-95d5-41c0-96d4-2b8460fa0349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Util">
-      <UniqueIdentifier>{d92ad362-d7d1-4d46-9183-8d8c5a988946}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene\GameoverScene.cpp">
@@ -60,12 +57,6 @@
     <ClCompile Include="Game\Field.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Pad.cpp">
-      <Filter>Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Vec2.cpp">
-      <Filter>Util</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\GameoverScene.h">
@@ -103,12 +94,6 @@
     </ClInclude>
     <ClInclude Include="Game\Field.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Pad.h">
-      <Filter>Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Vec2.h">
-      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
