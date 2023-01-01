@@ -1,6 +1,6 @@
 #pragma once
 #include "Secne.h"
-#include "../Game/Piece.h"
+#include "../Game/Field.h"
 
 /// <summary>
 /// ƒQ[ƒ€’†ƒV[ƒ“
@@ -25,6 +25,6 @@ public:
     void Update(const InputState& input);
     void Draw();
 
-    Piece m_pieces;
+    Field m_field;
 };
 

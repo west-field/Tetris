@@ -20,7 +20,7 @@ void GameplayingScene::FadeInUpdat(const InputState& input)
 
 void GameplayingScene::NormalUpdat(const InputState& input)
 {
-	m_pieces.Update(input);
+	m_field.Update(input);
 
 	if (input.IsTriggered(InputType::next))
 	{
@@ -68,7 +68,7 @@ GameplayingScene::Update(const InputState& input)
 void
 GameplayingScene::Draw()
 {
-	m_pieces.Darw();
+	m_field.Darw();
 	DrawString(300, 200, L"GameplayingScene", 0xffffff);
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeValue);

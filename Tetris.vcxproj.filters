@@ -57,7 +57,7 @@
     <ClCompile Include="Scene\KeyConfigScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Piece.cpp">
+    <ClCompile Include="Game\Field.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Util\Pad.cpp">
@@ -101,7 +101,7 @@
     <ClInclude Include="Scene\KeyConfigScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Piece.h">
+    <ClInclude Include="Game\Field.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Util\Pad.h">
