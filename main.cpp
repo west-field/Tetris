@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		// escƒL[‚ğ‰Ÿ‚µ‚½‚çI—¹‚·‚é
 		if (CheckHitKey(KEY_INPUT_ESCAPE))	break;
-
+		if (sceneManeger.GetIsEnd())	break;
 		// fps‚ğ60‚ÉŒÅ’è
 		while (GetNowHiPerformanceCount() - time < 16667){}
 	}
