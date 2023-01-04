@@ -1,5 +1,21 @@
 #pragma once
 #include "Secne.h"
+
+enum Menu
+{
+	menuGameStart,		//ゲーム
+	menuConfig,		//設定
+	menuGameEnd,	//ゲーム終了
+
+	menuNum			//項目の数
+};
+
+struct MenuElement
+{
+	int x, y;				//座標
+	//TCHAR selectMenuName[100];	//項目名
+};
+
 class InputState;
 /// <summary>
 /// タイトルシーン
@@ -7,7 +23,7 @@ class InputState;
 class TitleScene : public Scene
 {
 private:
-	//int m_titleH = -1;//タイトル画像
+	int m_selectNum = 0;//選択メニュー
 
 	//フェードインの時のUpdate関数
 	void FadeInUpdat(const InputState& input);
