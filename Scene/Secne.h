@@ -11,7 +11,7 @@ class Scene
 {
 protected:
 	SceneManager& m_manager;//シーンマネージャーへの参照
-
+	
 	static constexpr int kFadeInterval = 60;
 	int m_fadeTimer = kFadeInterval;//フェードタイマー
 	int m_fadeValue = 255;//黒矩形とのブレンド具合

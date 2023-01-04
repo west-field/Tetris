@@ -12,8 +12,7 @@ namespace
 {
 	constexpr int kOriginalPosX = Game::kScreenWidth / 3;    //メニュー文字の元のx位置
 	constexpr int kOriginalPosY = Game::kScreenHeight / 2;    //メニュー文字の元のy位置
-	constexpr int kTitleFontSize = 70;//文字列の幅
-	constexpr int kFontSize = 60;//文字列の幅
+	constexpr int kFontSize = 50;//文字列の幅
 	constexpr int kMovedPosX = kOriginalPosX - kFontSize;//メニュー文字の移動したx位置
 
 	MenuElement SelectMenu[menuNum] = {
@@ -97,12 +96,14 @@ void TitleScene::FadeOutUpdat(const InputState& input)
 
 TitleScene::TitleScene(SceneManager& manager) : Scene(manager),m_updateFunc(&TitleScene::FadeInUpdat)
 {
-	
+	m_titleH = my::MyLoadGraph(L"Data/title.png");
+	m_bgH = my::MyLoadGraph(L"Data/bg.png");
 }
 
 TitleScene::~TitleScene()
 {
-	
+	DeleteGraph(m_titleH);
+	DeleteGraph(m_bgH);
 }
 
 void
@@ -115,9 +116,9 @@ TitleScene::Update(const InputState& input)
 void
 TitleScene::Draw()
 {
+	DrawExtendGraph(0, 0, Game::kScreenWidth - 1, Game::kScreenHeight - 1, m_bgH, true);
+	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);
 	//メニュー項目を描画
-	SetFontSize(kTitleFontSize);
-	DrawFormatString(kOriginalPosX, Game::kScreenHeight / 3 - kTitleFontSize, 0xffffff, L"テトリス");
 	SetFontSize(kFontSize);
 	DrawFormatString(SelectMenu[menuGameStart].x, SelectMenu[menuGameStart].y, 0xffffff, L"ゲームスタート");
 	DrawFormatString(SelectMenu[menuConfig].x, SelectMenu[menuConfig].y, 0xffffff, L"設定");

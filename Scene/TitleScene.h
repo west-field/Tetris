@@ -24,6 +24,8 @@ class TitleScene : public Scene
 {
 private:
 	int m_selectNum = 0;//選択メニュー
+	int m_titleH = -1;
+	int m_bgH = -1;
 
 	//フェードインの時のUpdate関数
 	void FadeInUpdat(const InputState& input);
