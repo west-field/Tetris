@@ -12,10 +12,9 @@ class InputState;//入力ステート
 class SceneManager
 {
 private:
-	//◇切り替えるためにポインタ
 	//今実行中のシーンを切り替えていきたいので参照ではなくポインタとして宣言
 	std::deque<Scene*> m_scenes;
-
+	bool m_isEnd = false;
 public:
 	/// <summary>
 	/// シーンの切り替えを行う
@@ -44,5 +43,8 @@ public:
 	/// 描画
 	/// </summary>
 	void Draw();
+
+	void SetIsEnd() { m_isEnd = true; }
+	bool GetIsEnd() const { return m_isEnd; }
 };
 
