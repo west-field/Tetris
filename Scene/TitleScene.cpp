@@ -116,7 +116,7 @@ TitleScene::Update(const InputState& input)
 void
 TitleScene::Draw()
 {
-	DrawExtendGraph(0, 0, Game::kScreenWidth - 1, Game::kScreenHeight - 1, m_bgH, true);
+	//DrawExtendGraph(0, 0, Game::kScreenWidth - 1, Game::kScreenHeight - 1, m_bgH, true);
 	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);
 	//ƒƒjƒ…[€–Ú‚ğ•`‰æ
 	SetFontSize(kFontSize);
