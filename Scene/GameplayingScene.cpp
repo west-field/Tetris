@@ -75,7 +75,6 @@ void
 GameplayingScene::Draw()
 {
 	m_field.Darw();
-	DrawString(300, 200, L"GameplayingScene", 0xffffff);
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeValue);
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_fadeColor, true);

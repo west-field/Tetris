@@ -101,8 +101,8 @@ void Field::Darw()
 		DrawString(m_nextTetriminoX, m_nextTetriminoY - 30, L"next", 0xffffff);
 	}
 
-	DrawFormatString(0, 0, 0xffaaff, L"m_minoType%d,m_minoAngle%d", m_tetriminoType, m_tetriminoAngle);
-	DrawFormatString(0, 20, 0xffaaff, L"m_tetriminoX%d,m_tetriminoY%d", m_tetriminoX, m_tetriminoY);
+	/*DrawFormatString(0, 0, 0xffaaff, L"m_minoType%d,m_minoAngle%d", m_tetriminoType, m_tetriminoAngle);
+	DrawFormatString(0, 20, 0xffaaff, L"m_tetriminoX%d,m_tetriminoY%d", m_tetriminoX, m_tetriminoY);*/
 }
 
 void Field::NomalUpdate(const InputState& input)
