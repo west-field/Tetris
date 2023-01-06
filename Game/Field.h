@@ -26,11 +26,14 @@ namespace
 	//横移動時間
 	constexpr float kMoveTime = 8.0f;
 	//回転移動時間
-	constexpr float kRollTime = 8.0f;
+	constexpr float kRollTime = 9.5f;
 	//回転移動時間
 	constexpr float kDeleteTime = 20.0f;
 	//落ちる時間
 	constexpr float kFallTime = 30.0f;
+	//下を押したときの移動スピード
+	constexpr float kFallSpeed = 8.0f;
+	//上を押したとき落ちる時間が遅くなる
 	constexpr float kSlowlyFallTime = 0.5f;
 }
 
@@ -57,6 +60,8 @@ public:
 	virtual ~Field();
 	void Update(const InputState& input);
 	void Darw();
+	//ゲームオーバー判定
+	bool GameOver();
 private:
 	void NomalUpdate(const InputState& input);
 	void DeleteLineUpdate(const InputState& input);
@@ -70,9 +75,11 @@ private:
 	void TetriminoPos();
 	//テトリミノがあったっているかどうか
 	bool TetriminoIsHit(int X, int Y, int type, int angle);
+	//テトリミノが回転したときにフィールド内にあるかどうか
+	void TetriminoIsField();
 	//テトリミノをリセットする
 	void ResetTetrimino();
-
+	
 	//Update用メンバ関数ポインタ
 	using UpdateFunc_t = void(Field::*)(const InputState& input);
 	UpdateFunc_t m_updateFunc = nullptr;
@@ -110,9 +117,7 @@ private:
 	//消す時間
 	float m_deleteTime = kDeleteTime;
 	//落ちる時間
-	float m_dropTime = kFallTime;
-	//下を押したときの移動スピード
-	float m_dropSpeed = 8.0f;
+	float m_FallTime = kFallTime;
 	//消せるラインがあるかどうか
 	bool m_isDeleteLine = false;
 
@@ -138,8 +143,8 @@ private:
 			//Angle180
 			{
 				{0,0,0,0},
-				{1,1,1,1},
 				{0,0,0,0},
+				{1,1,1,1},
 				{0,0,0,0}
 			},
 			//Angle270

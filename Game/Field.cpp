@@ -1,4 +1,5 @@
 #define SPASE -1
+#define WALL 8
 
 #include "Field.h"
 #include <DxLib.h>
@@ -18,17 +19,14 @@ Field::Field():m_updateFunc(&Field::NomalUpdate)
 	}
 	for (int x = 0; x < kFieldWidthMax; x++)
 	{
-		//空間
-		m_field[0][x] = 7;
-		m_field[1][x] = 7;
 		//床
-		m_field[kFieldHeightMax - 1][x] = 8;
+		m_field[kFieldHeightMax - 1][x] = WALL;
 	}
 	for (int y = 0; y < kFieldHeightMax; y++)
 	{
 		//壁
-		m_field[y][0] = 8;
-		m_field[y][kFieldWidthMax - 1] = 8;
+		m_field[y][0] = WALL;
+		m_field[y][kFieldWidthMax - 1] = WALL;
 	}
 
 	m_startPosX = (Game::kScreenWidth - kTetriminoSize * kFieldWidthMax) / 2;
@@ -99,15 +97,16 @@ void Field::Darw()
 				}
 			}
 		}
+
+		DrawString(m_nextTetriminoX, m_nextTetriminoY - 30, L"next", 0xffffff);
 	}
 
 	DrawFormatString(0, 0, 0xffaaff, L"m_minoType%d,m_minoAngle%d", m_tetriminoType, m_tetriminoAngle);
+	DrawFormatString(0, 20, 0xffaaff, L"m_tetriminoX%d,m_tetriminoY%d", m_tetriminoX, m_tetriminoY);
 }
 
 void Field::NomalUpdate(const InputState& input)
 {
-	TetriminoPos();
-
 	if (--m_moveTime <= 0)
 	{
 		//左に移動
@@ -150,15 +149,16 @@ void Field::NomalUpdate(const InputState& input)
 	//落ちるスピードを速くする
 	if (input.IsPressed(InputType::down))
 	{
-		m_dropTime -= m_dropSpeed;
+		m_FallTime -= kFallSpeed;
 	}
 	//落ちるスピードを遅くする
 	else if (input.IsPressed(InputType::up))
 	{
-		m_dropTime += kSlowlyFallTime;
+		m_FallTime += kSlowlyFallTime;
 	}
+	TetriminoPos();
 	//落ちる時間を制御
-	if (--m_dropTime <= 0)
+	if (--m_FallTime <= 0)
 	{
 		if (!TetriminoIsHit(m_tetriminoX, m_tetriminoY + 1, m_tetriminoType, m_tetriminoAngle))
 		{
@@ -170,7 +170,7 @@ void Field::NomalUpdate(const InputState& input)
 			DeleteLine();
 			ResetTetrimino();
 		}
-		m_dropTime = kFallTime;
+		m_FallTime = kFallTime;
 	}
 }
 
@@ -295,48 +295,13 @@ void Field::TetriminoPos()
 	}
 
 	//テトリミノの位置を決める
-	for (int y = 0; y < kTetriminoHeight; y++)
+	for (int x = 0; x < kTetriminoWidth; x++)
 	{
-		for (int x = 0; x < kTetriminoWidth; x++)
+		for (int y = 0; y < kTetriminoHeight; y++)
 		{
 			if (m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x] != 0)
 			{
 				m_tetriminoMove[m_tetriminoY + y][m_tetriminoX + x] = m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x];
-			}
-		}
-	}
-
-	//動かしたテトリミノがフィールド内にあるかどうか
-	bool isInField = true;
-	int X = 0;
-	for (int y = 0; y < kFieldHeightMax; y++)
-	{
-		//壁に入りこんでいるか
-		if (m_tetriminoMove[y][0] != 0)
-		{
-			X = 0;
-			isInField = false;
-			break;
-		}
-		if (m_tetriminoMove[y][kFieldWidthMax - 1] != 0)
-		{
-			X = kFieldWidth;
-			isInField = false;
-			break;
-		}
-	}
-
-	if (!isInField)
-	{
-		//もう一度テトリミノの位置を決める
-		for (int y = 0; y < kTetriminoHeight; y++)
-		{
-			for (int x = 0; x < kTetriminoWidth; x++)
-			{
-				if (m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x] != 0)
-				{
-					m_tetriminoMove[m_tetriminoY + y][X + x] = m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x];
-				}
 			}
 		}
 	}
@@ -357,6 +322,66 @@ bool Field::TetriminoIsHit(int X, int Y, int type, int angle)
 	return false;
 }
 
+void Field::TetriminoIsField()
+{
+	//動かしたテトリミノがフィールド内にあるかどうか
+	bool isInField = true;
+	for (int y = 0; y < kFieldHeightMax; y++)
+	{
+		//壁に入りこんでいるか
+		if (m_tetriminoMove[y][0] != 0)
+		{
+			if (m_tetriminoType == 0)
+			{
+				m_tetriminoX += 2;
+			}
+			else
+			{
+				m_tetriminoX += 1;
+			}
+			isInField = false;
+			break;
+		}
+		if (m_tetriminoMove[y][kFieldWidthMax - 1] != 0)
+		{
+			if (m_tetriminoType == 0)
+			{
+				m_tetriminoX -= 2;
+			}
+			else
+			{
+				m_tetriminoX -= 1;
+			}
+			isInField = false;
+			break;
+		}
+	}
+
+	if (!isInField)
+	{
+		//表示するテトリミノをリセット
+		for (int y = 0; y < kFieldHeightMax; y++)
+		{
+			for (int x = 0; x < kFieldWidthMax; x++)
+			{
+				m_tetriminoMove[y][x] = 0;
+			}
+		}
+
+		//もう一度テトリミノの位置を決める
+		for (int x = 0; x < kTetriminoWidth; x++)
+		{
+			for (int y = 0; y < kTetriminoHeight; y++)
+			{
+				if (m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x] != 0)
+				{
+					m_tetriminoMove[m_tetriminoY + y][m_tetriminoX + x] = m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x];
+				}
+			}
+		}
+	}
+}
+
 void Field::ResetTetrimino()
 {
 	//初期位置
@@ -374,4 +399,17 @@ void Field::ResetTetrimino()
 	//表示する角度
 	m_tetriminoAngle = 0;
 	m_angle = AngleMax * 10;
+}
+
+bool Field::GameOver()
+{
+	for (int x = kFieldWall; x < kFieldWidth; x++)
+	{
+		if (m_field[1][x] != SPASE)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

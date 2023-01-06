@@ -22,6 +22,12 @@ void GameplayingScene::NormalUpdat(const InputState& input)
 {
 	m_field.Update(input);
 
+	if (m_field.GameOver())
+	{
+		m_updateFunc = &GameplayingScene::FadeOutUpdat;
+		m_fadeColor = 0xff0000;
+	}
+
 	if (input.IsTriggered(InputType::next))
 	{
 		m_updateFunc = &GameplayingScene::FadeOutUpdat;
