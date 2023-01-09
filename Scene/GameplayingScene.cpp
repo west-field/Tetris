@@ -1,6 +1,7 @@
 #include "GameplayingScene.h"
 #include <DxLib.h>
 #include "../game.h"
+#include "../Sound.h"
 #include "../InputState.h"
 #include "../DrawFunctions.h"
 #include "SceneManager.h"
@@ -14,6 +15,7 @@ void GameplayingScene::FadeInUpdat(const InputState& input)
 	m_fadeValue = 255 * m_fadeTimer / kFadeInterval;
 	if (--m_fadeTimer == 0)
 	{
+		Sound::StartBgm(Sound::BgmMain);
 		m_updateFunc = &GameplayingScene::NormalUpdat;
 		m_fadeValue = 0;
 		m_manager.PushScene(new GameStartCountScene(m_manager));
@@ -74,7 +76,7 @@ GameplayingScene::GameplayingScene(SceneManager& manager) : Scene(manager),m_upd
 
 GameplayingScene::~GameplayingScene()
 {
-	
+	Sound::StopBgm(Sound::BgmMain);
 }
 
 void
@@ -92,10 +94,11 @@ GameplayingScene::Draw()
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_fadeColor, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	//スコア表示
-	DrawFormatString((Game::kScreenWidth - kTetriminoSize * kFieldWidthMax) / 2 + kTetriminoSize * kFieldWidthMax + kTetriminoSize * 3,
-		(Game::kScreenHeight - kTetriminoSize * kFieldHeightMax) / 2 + kTetriminoSize * 8, 0xffffff, L"SCORE %d", m_point);
-	//レベル表示
-	DrawFormatString(0, 0, 0xffffff, L"Level %d", m_level);
+	int X = (Game::kScreenWidth - 30 * 12) / 2 + 30 * 12 + 30 * 3;
+	int  Y = (Game::kScreenHeight - 30 * 23) / 2 + 30 * 8;
 
+	//レベル表示
+	DrawFormatString(X, Y, 0xffffff, L"Level %d", m_level);
+	//スコア表示
+	DrawFormatString(X, Y+20, 0xffffff, L"SCORE %d", m_point);
 }

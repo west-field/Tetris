@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "game.h"
+#include "Sound.h"
 #include "InputState.h"
 #include "Scene/SceneManager.h"
 #include "Scene/TitleScene.h"
@@ -19,6 +20,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	SetDrawScreen(DX_SCREEN_BACK);
+
+	Sound::Load();
 
 	InputState input;
 	SceneManager sceneManeger;
@@ -44,6 +47,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// fps‚ð60‚ÉŒÅ’è
 		while (GetNowHiPerformanceCount() - time < 16667){}
 	}
+	Sound::Unload();
 	DxLib_End();
 
 	return 0;

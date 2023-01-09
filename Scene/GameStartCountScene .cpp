@@ -1,6 +1,7 @@
 #include "GameStartCountScene.h"
 #include <DxLib.h>
 #include "../game.h"
+#include "../Sound.h"
 #include "../InputState.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
@@ -9,6 +10,7 @@
 
 GameStartCountScene::GameStartCountScene(SceneManager& manager) : Scene(manager), m_updateFunc(&GameStartCountScene::CountDownUpdat)
 {
+	Sound::Play(Sound::Count);
 }
 
 GameStartCountScene::~GameStartCountScene()

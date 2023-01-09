@@ -1,6 +1,7 @@
 #include "GameoverScene.h"
 #include <DxLib.h>
 #include "../game.h"
+#include "../Sound.h"
 #include "../InputState.h"
 #include "../DrawFunctions.h"
 #include "SceneManager.h"
@@ -38,11 +39,13 @@ void GameoverScene::FadeOutUpdat(const InputState& input)
 
 GameoverScene::GameoverScene(SceneManager& manager) : Scene(manager) , m_updateFunc(&GameoverScene::FadeInUpdat) {
 	//m_gameoverH = my::MyLoadGraph(L"Data/img/gameover.png");
+	Sound::StartBgm(Sound::BgmGameover);
 }
 
 GameoverScene::~GameoverScene()
 {
 	//DeleteGraph(m_gameoverH);
+	Sound::StopBgm(Sound::BgmGameover);
 }
 
 void
@@ -55,9 +58,18 @@ void
 GameoverScene::Draw()
 {
 	//DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 2, 1.0f, 0.0f, m_gameoverH, true);
-	DrawString(300, 200, L"GameoverScene", 0xffffff);
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeValue);
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_fadeColor, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	//int X = Game::kScreenWidth  / 2 ;
+	//int  Y = Game::kScreenHeight  / 2 ;
+	SetFontSize(50);
+	DrawString(Game::kScreenWidth / 3, Game::kScreenHeight / 3, L"Gameover", 0xffffff);
+	////レベル表示
+	//DrawFormatString(X, Y, 0xffffff, L"Level %d", m_level);
+	////スコア表示
+	//DrawFormatString(X, Y + 50, 0xffffff, L"SCORE %d", m_point);
+	SetFontSize(0);
 }

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../game.h"
+#include "../Sound.h"
 #include "../InputState.h"
 
 Field::Field():m_updateFunc(&Field::NomalUpdate)
@@ -115,6 +116,7 @@ void Field::NomalUpdate(const InputState& input)
 				m_tetriminoX--;
 			}
 			m_moveTime = kMoveTime;
+			Sound::Play(Sound::BlockMove);
 		}
 		//‰E‚ÉˆÚ“®
 		else if (input.IsPressed(InputType::right))
@@ -124,6 +126,7 @@ void Field::NomalUpdate(const InputState& input)
 				m_tetriminoX++;
 			}
 			m_moveTime = kMoveTime;
+			Sound::Play(Sound::BlockMove);
 		}
 	}
 	if (--m_rollTime <= 0)
@@ -134,6 +137,7 @@ void Field::NomalUpdate(const InputState& input)
 			m_angle--;
 			m_tetriminoAngle = m_angle % AngleMax;
 			m_rollTime = kRollTime;
+			Sound::Play(Sound::BlockMove);
 		}
 		//‰E‚É‰ñ“]
 		else if (input.IsPressed(InputType::rightroll))
@@ -141,6 +145,7 @@ void Field::NomalUpdate(const InputState& input)
 			m_angle++;
 			m_tetriminoAngle = m_angle % AngleMax;
 			m_rollTime = kRollTime;
+			Sound::Play(Sound::BlockMove);
 		}
 	}
 
@@ -158,6 +163,7 @@ void Field::NomalUpdate(const InputState& input)
 	//—Ž‚¿‚éŽžŠÔ‚ð§Œä
 	if (--m_FallTime <= 0)
 	{
+		Sound::Play(Sound::BlockMove);
 		if (!TetriminoIsHit(m_tetriminoX, m_tetriminoY + 1, m_tetriminoType, m_tetriminoAngle))
 		{
 			m_tetriminoY++;
@@ -190,6 +196,7 @@ void Field::DeleteLineUpdate(const InputState& input)
 		{
 			DropLine();
 		}
+		Sound::Play(Sound::BlockPlacing);
 		m_levelChange += m_lineNum;
 		
 		//‰Šú‰»
@@ -212,6 +219,7 @@ void Field::TetriminoToField()
 			}
 		}
 	}
+	Sound::Play(Sound::BlockPlacing);
 }
 
 void Field::DeleteLine()
@@ -247,6 +255,7 @@ void Field::DeleteLine()
 	
 	if (m_isDeleteLine)
 	{
+		Sound::Play(Sound::Blocking);
 		m_updateFunc = &Field::DeleteLineUpdate;
 	}
 }

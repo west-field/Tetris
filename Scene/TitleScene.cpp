@@ -1,6 +1,7 @@
 #include "TitleScene.h"
 #include <DxLib.h>
 #include "../game.h"
+#include "../Sound.h"
 #include "../InputState.h"
 #include "../DrawFunctions.h"
 #include "SceneManager.h"
@@ -41,6 +42,7 @@ void TitleScene::NormalUpdat(const InputState& input)
 
 	if (isPress)
 	{
+		Sound::Play(Sound::Cursor);
 		for (int i = 0; i < menuNum; i++)
 		{
 			if (i == m_selectNum)
@@ -56,6 +58,7 @@ void TitleScene::NormalUpdat(const InputState& input)
 	//「次へ」ボタンが押されたら次シーンへ移行する
 	if (input.IsTriggered(InputType::next))
 	{
+		Sound::Play(Sound::Determinant);
 		m_updateFunc = &TitleScene::FadeOutUpdat;
 	}
 	if (input.IsTriggered(InputType::prev))
@@ -91,12 +94,14 @@ TitleScene::TitleScene(SceneManager& manager) : Scene(manager),m_updateFunc(&Tit
 {
 	m_titleH = my::MyLoadGraph(L"Data/title.png");
 	m_bgH = my::MyLoadGraph(L"Data/bg.png");
+	Sound::StartBgm(Sound::BgmMain);
 }
 
 TitleScene::~TitleScene()
 {
 	DeleteGraph(m_titleH);
 	DeleteGraph(m_bgH);
+	Sound::StopBgm(Sound::BgmMain);
 }
 
 void
