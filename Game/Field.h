@@ -23,6 +23,8 @@ namespace
 	constexpr int kTetriminoWidth = 4;
 	constexpr int kTetriminoSize = 30;
 
+	//
+
 	//横移動時間
 	constexpr float kMoveTime = 8.0f;
 	//回転移動時間
@@ -30,7 +32,7 @@ namespace
 	//回転移動時間
 	constexpr float kDeleteTime = 20.0f;
 	//落ちる時間
-	constexpr float kFallTime = 30.0f;
+	constexpr float kFallTime = 60.0f;
 	//下を押したときの移動スピード
 	constexpr float kFallSpeed = 8.0f;
 	//上を押したとき落ちる時間が遅くなる

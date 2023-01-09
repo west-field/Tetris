@@ -14,6 +14,7 @@ class SceneManager
 private:
 	//今実行中のシーンを切り替えていきたいので参照ではなくポインタとして宣言
 	std::deque<Scene*> m_scenes;
+	//ゲームを終了させる
 	bool m_isEnd = false;
 public:
 	/// <summary>

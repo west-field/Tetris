@@ -10,16 +10,7 @@
 
 namespace
 {
-	constexpr int kOriginalPosX = Game::kScreenWidth / 3;    //メニュー文字の元のx位置
-	constexpr int kOriginalPosY = Game::kScreenHeight / 2;    //メニュー文字の元のy位置
-	constexpr int kFontSize = 50;//文字列の幅
-	constexpr int kMovedPosX = kOriginalPosX - kFontSize;//メニュー文字の移動したx位置
-
-	MenuElement SelectMenu[menuNum] = {
-		{ kMovedPosX, kOriginalPosY + kFontSize * menuGameStart },
-		{ kOriginalPosX, kOriginalPosY + kFontSize * menuConfig},
-		{ kOriginalPosX, kOriginalPosY + kFontSize * menuGameEnd}
-	};
+	
 }
 
 void TitleScene::FadeInUpdat(const InputState& input)
@@ -35,18 +26,21 @@ void TitleScene::FadeInUpdat(const InputState& input)
 
 void TitleScene::NormalUpdat(const InputState& input)
 {
+	m_blockY += 1.0f;
+	bool isPress = false;//キーが押されたかどうか
 	if (input.IsTriggered(InputType::down))
-	{//下キーが押されていたら
+	{
 		m_selectNum = (m_selectNum + 1) % menuNum;//選択状態を一つ下げる
+		isPress = true;
 	}
 	else if (input.IsTriggered(InputType::up))
-	{//上キーが押されていたら
+	{
 		m_selectNum = (m_selectNum + (menuNum - 1)) % menuNum;//選択状態を一つ上げる
+		isPress = true;
 	}
 
-	if (input.IsTriggered(InputType::down) || input.IsTriggered(InputType::up))
+	if (isPress)
 	{
-		// メニュー項目数である4個ループ処理
 		for (int i = 0; i < menuNum; i++)
 		{
 			if (i == m_selectNum)
@@ -62,7 +56,6 @@ void TitleScene::NormalUpdat(const InputState& input)
 	//「次へ」ボタンが押されたら次シーンへ移行する
 	if (input.IsTriggered(InputType::next))
 	{
-		//押されたらNormalUpdatからFadeOutUpdatに変更する
 		m_updateFunc = &TitleScene::FadeOutUpdat;
 	}
 	if (input.IsTriggered(InputType::prev))
@@ -125,11 +118,9 @@ TitleScene::Draw()
 	DrawFormatString(SelectMenu[menuGameEnd].x, SelectMenu[menuGameEnd].y, 0xffffff, L"ゲーム終了");
 	SetFontSize(0);
 
-	//今から書く画像と、すでに描画されているスクリーンとのブレンドの仕方をしている。
+	//DrawBoxAA(m_blockX, m_blockY, m_blockX + 50.0f, m_blockY + 50.0f, 0xffffff, true);
+
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeValue);
-	//◇上から消えるMULADrawGraph(0, 0, gradH_, true);
-	//画面全体を真っ黒に塗りつぶす
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, 0x000000, true);
-	//一度変更するとずっと残るのでNOBLEND,0に戻す
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }

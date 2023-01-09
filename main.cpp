@@ -39,6 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		// escキーを押したら終了する
 		if (CheckHitKey(KEY_INPUT_ESCAPE))	break;
+		//isEndがtrueのとき終了する
 		if (sceneManeger.GetIsEnd())	break;
 		// fpsを60に固定
 		while (GetNowHiPerformanceCount() - time < 16667){}

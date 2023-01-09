@@ -18,7 +18,6 @@ private:
     using UpdateFunc_t = void (GameplayingScene::*)(const InputState& input);
     UpdateFunc_t m_updateFunc = nullptr;
 public:
-    //◇アンパサンドを必ずつける
     GameplayingScene(SceneManager& manager);
     virtual ~GameplayingScene();
 
