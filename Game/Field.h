@@ -23,8 +23,6 @@ namespace
 	constexpr int kTetriminoWidth = 4;
 	constexpr int kTetriminoSize = 30;
 
-	//
-
 	//横移動時間
 	constexpr float kMoveTime = 8.0f;
 	//回転移動時間
@@ -64,6 +62,10 @@ public:
 	void Darw();
 	//ゲームオーバー判定
 	bool GameOver();
+
+	int GetChangeLevel() { int num = 0; if (m_levelChange >= 5 ) { num = m_levelChange; m_levelChange = 0; } return num; }
+	int GetLineNum() { int line = m_lineNum; m_lineNum = 0; return line; }
+	void SetFallTime(float num) { m_FallTimeLevel = num; }
 private:
 	void NomalUpdate(const InputState& input);
 	void DeleteLineUpdate(const InputState& input);
@@ -93,6 +95,11 @@ private:
 	//テトリミノを消せるライン
 	bool m_deleteLine[kFieldHeightMax] = {};
 
+	//レベル
+	int m_levelChange = 0;
+	//何列消したのか数える
+	int m_lineNum = 0;
+	
 	//フィールドを表示する位置
 	int m_startPosX = 0;
 	int m_startPosY = 0;
@@ -120,6 +127,7 @@ private:
 	float m_deleteTime = kDeleteTime;
 	//落ちる時間
 	float m_FallTime = kFallTime;
+	float m_FallTimeLevel = 0;
 	//消せるラインがあるかどうか
 	bool m_isDeleteLine = false;
 

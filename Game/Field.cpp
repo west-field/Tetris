@@ -101,8 +101,6 @@ void Field::Darw()
 		DrawString(m_nextTetriminoX, m_nextTetriminoY - 30, L"next", 0xffffff);
 	}
 
-	/*DrawFormatString(0, 0, 0xffaaff, L"m_minoType%d,m_minoAngle%d", m_tetriminoType, m_tetriminoAngle);
-	DrawFormatString(0, 20, 0xffaaff, L"m_tetriminoX%d,m_tetriminoY%d", m_tetriminoX, m_tetriminoY);*/
 }
 
 void Field::NomalUpdate(const InputState& input)
@@ -170,7 +168,7 @@ void Field::NomalUpdate(const InputState& input)
 			DeleteLine();
 			ResetTetrimino();
 		}
-		m_FallTime = kFallTime;
+		m_FallTime = kFallTime - m_FallTimeLevel;
 	}
 }
 
@@ -178,20 +176,22 @@ void Field::DeleteLineUpdate(const InputState& input)
 {
 	if (--m_deleteTime <= 0)
 	{
-		int lineNum = 0;//‰½—ñÁ‚µ‚½‚Ì‚©”‚¦‚é
+		m_lineNum = 0;//‰½—ñÁ‚µ‚½‚Ì‚©”‚¦‚é
 		for (auto& line : m_deleteLine)
 		{
 			if (line)
 			{
-				lineNum++;
+				m_lineNum++;
 			}
 			line = false;//‰Šú‰»
 		}
 		//Á‚µ‚½•ª‚¾‚¯‰º‚É—Ž‚Æ‚·
-		for (int i = 0; i < lineNum; i++)
+		for (int i = 0; i < m_lineNum; i++)
 		{
 			DropLine();
 		}
+		m_levelChange += m_lineNum;
+		
 		//‰Šú‰»
 		m_deleteTime = kDeleteTime;
 		m_isDeleteLine = false;

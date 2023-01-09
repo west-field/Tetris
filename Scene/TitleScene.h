@@ -20,10 +20,10 @@ struct MenuElement
 
 namespace
 {
-	constexpr int kFontSize = 50;//文字のサイズ
-	constexpr int kOriginalPosX = Game::kScreenWidth / 3 + kFontSize;    //メニュー文字のx位置
-	constexpr int kOriginalPosY = Game::kScreenHeight / 2 + kFontSize;    //メニュー文字のy位置
-	constexpr int kMovedPosX = kOriginalPosX - kFontSize;//メニュー文字の移動したx位置
+	constexpr int kMenuFontSize = 50;//文字のサイズ
+	constexpr int kOriginalPosX = Game::kScreenWidth / 3 + kMenuFontSize;    //メニュー文字のx位置
+	constexpr int kOriginalPosY = Game::kScreenHeight / 2 + kMenuFontSize;    //メニュー文字のy位置
+	constexpr int kMovedPosX = kOriginalPosX - kMenuFontSize;//メニュー文字の移動したx位置
 }
 
 class InputState;
@@ -52,9 +52,9 @@ private:
 	void (TitleScene::* m_updateFunc)(const InputState& input);
 
 	MenuElement SelectMenu[menuNum] = {
-		{ kMovedPosX, kOriginalPosY + kFontSize * menuGameStart },
-		{ kOriginalPosX, kOriginalPosY + kFontSize * menuConfig},
-		{ kOriginalPosX, kOriginalPosY + kFontSize * menuGameEnd}
+		{ kMovedPosX, kOriginalPosY + kMenuFontSize * menuGameStart },
+		{ kOriginalPosX, kOriginalPosY + kMenuFontSize * menuConfig},
+		{ kOriginalPosX, kOriginalPosY + kMenuFontSize * menuGameEnd}
 	};
 
 public:

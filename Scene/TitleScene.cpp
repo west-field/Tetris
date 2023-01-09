@@ -112,7 +112,7 @@ TitleScene::Draw()
 	//DrawExtendGraph(0, 0, Game::kScreenWidth - 1, Game::kScreenHeight - 1, m_bgH, true);
 	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);
 	//メニュー項目を描画
-	SetFontSize(kFontSize);
+	SetFontSize(kMenuFontSize);
 	DrawFormatString(SelectMenu[menuGameStart].x, SelectMenu[menuGameStart].y, 0xffffff, L"ゲームスタート");
 	DrawFormatString(SelectMenu[menuConfig].x, SelectMenu[menuConfig].y, 0xffffff, L"設定");
 	DrawFormatString(SelectMenu[menuGameEnd].x, SelectMenu[menuGameEnd].y, 0xffffff, L"ゲーム終了");

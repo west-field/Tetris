@@ -47,5 +47,6 @@ public:
 
 	void SetIsEnd() { m_isEnd = true; }
 	bool GetIsEnd() const { return m_isEnd; }
+	
 };
 

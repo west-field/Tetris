@@ -138,6 +138,7 @@
     <ClCompile Include="DrawFunctions.cpp" />
     <ClCompile Include="Game\Field.cpp" />
     <ClCompile Include="InputState.cpp" />
+    <ClCompile Include="Scene\GameStartCountScene .cpp" />
     <ClCompile Include="Scene\KeyConfigScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\GameoverScene.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="Game\Field.h" />
     <ClInclude Include="InputState.h" />
+    <ClInclude Include="Scene\GameStartCountScene.h" />
     <ClInclude Include="Scene\KeyConfigScene.h" />
     <ClInclude Include="Scene\GameoverScene.h" />
     <ClInclude Include="Scene\GameplayingScene.h" />
