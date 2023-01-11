@@ -61,6 +61,12 @@ void PauseScene::Update(const InputState& input)
 			break;
 		}
 	}
+	if (input.IsTriggered(InputType::prev))
+	{
+		m_selectNum = pauseBack;
+		m_manager.PopScene();
+		return;
+	}
 }
 
 void PauseScene::Draw()

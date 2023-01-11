@@ -27,9 +27,6 @@
     <ClCompile Include="Scene\GameplayingScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\OptionScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\PauseScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -63,15 +60,15 @@
     <ClCompile Include="Sound.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\OptionScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\GameoverScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\GameplayingScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\OptionScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\PauseScene.h">
@@ -106,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\OptionScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
