@@ -79,10 +79,6 @@ void Field::Darw()
 						DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_tetriminoType], true);
 					}
 				}
-
-				{
-					DrawFormatString(X, Y, 0xffffff, L"%d", x);
-				}
 			}
 		}
 	}
