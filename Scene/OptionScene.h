@@ -45,7 +45,7 @@ public:
 		{kconfigStartX + 20,kconfigStartY + kFontSize+10 + 20 * configKeyconfig,0xAAD8E6},
 		{kconfigStartX + 10,kconfigStartY + kFontSize+10 + 20 * configBack,0xffffff},
 	};
-	int m_selectNum = 1;
+	int m_selectNum = 0;
 private:
 	//フェードインの時のUpdate関数
 	void FadeInUpdat(const InputState& input);
