@@ -23,6 +23,9 @@ namespace
 	constexpr int pw_height = 300;
 	constexpr int pw_start_x = (Game::kScreenWidth - pw_width) / 2;
 	constexpr int pw_start_y = (Game::kScreenHeight - pw_height) / 2;
+
+	constexpr int kPosX = pw_start_x + 10;
+	constexpr int kPosY = pw_start_y + 30;
 }
 
 class InputState;
@@ -47,5 +50,8 @@ public:
 		{pw_start_x + 10,pw_start_y + 30 + 20 * pauseTitle,0xffffff},
 	};
 	int m_selectNum = 0;
+
+	int m_posX = kPosX;
+	int m_posY = kPosY;
 };
 
