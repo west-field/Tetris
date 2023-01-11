@@ -79,6 +79,10 @@ void Field::Darw()
 						DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_tetriminoType], true);
 					}
 				}
+
+				{
+					DrawFormatString(X, Y, 0xffffff, L"%d", x);
+				}
 			}
 		}
 	}
@@ -102,6 +106,25 @@ void Field::Darw()
 		DrawString(m_nextTetriminoX, m_nextTetriminoY - 30, L"next", 0xffffff);
 	}
 
+	//ゲームオーバー判定
+	/*{
+		for (int y = 0; y < 2; y++)
+		{
+			for (int x = 5; x < 5 + 4; x++)
+			{
+				int X = m_startPosX + x * kTetriminoSize;
+				int Y = m_startPosY + y * kTetriminoSize;
+
+				if (m_field[y][x] != SPASE)
+				{
+					DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[7], true);
+				}
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
+				DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[7], true);
+				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+			}
+		}
+	}*/
 }
 
 void Field::NomalUpdate(const InputState& input)
@@ -294,25 +317,23 @@ void Field::DropLine()
 
 void Field::TetriminoPos()
 {
+	//表示するテトリミノをリセット
+	for (int y = 0; y < kFieldHeightMax; y++)
 	{
-		//表示するテトリミノをリセット
-		for (int y = 0; y < kFieldHeightMax; y++)
+		for (int x = 0; x < kFieldWidthMax; x++)
 		{
-			for (int x = 0; x < kFieldWidthMax; x++)
-			{
-				m_tetriminoMove[y][x] = 0;
-			}
+			m_tetriminoMove[y][x] = 0;
 		}
+	}
 
-		//テトリミノの位置を決める
-		for (int x = 0; x < kTetriminoWidth; x++)
+	//テトリミノの位置を決める
+	for (int x = 0; x < kTetriminoWidth; x++)
+	{
+		for (int y = 0; y < kTetriminoHeight; y++)
 		{
-			for (int y = 0; y < kTetriminoHeight; y++)
+			if (m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x] != 0)
 			{
-				if (m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x] != 0)
-				{
-					m_tetriminoMove[m_tetriminoY + y][m_tetriminoX + x] = m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x];
-				}
+				m_tetriminoMove[m_tetriminoY + y][m_tetriminoX + x] = m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x];
 			}
 		}
 	}
@@ -439,11 +460,15 @@ void Field::ResetTetrimino()
 
 bool Field::GameOver()
 {
-	for (int x = kFieldWall; x < kFieldWidth; x++)
+	//新しいミノが出現した時に、重なる部分が存在したらゲームオーバー
+	for (int y = 0; y < 2; y++)
 	{
-		if (m_field[1][x] != SPASE)
+		for (int x = 5; x < 5 + 4; x++)
 		{
-			return true;
+			if (m_field[y][x] != SPASE)
+			{
+				return true;
+			}
 		}
 	}
 
