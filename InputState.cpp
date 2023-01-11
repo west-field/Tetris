@@ -17,10 +17,10 @@ InputState::InputState()
 											{InputCategory::pad,PAD_INPUT_Y} };//左ショルダー
 
 	m_inputMapTable[InputType::up] = { {InputCategory::keybd,KEY_INPUT_UP},
-											{InputCategory::pad,PAD_INPUT_UP} };//上ショルダー
+											{InputCategory::pad,PAD_INPUT_UP} };//上
 
 	m_inputMapTable[InputType::down] = { {InputCategory::keybd,KEY_INPUT_DOWN},
-											{InputCategory::pad,PAD_INPUT_DOWN} };//下ショルダー
+											{InputCategory::pad,PAD_INPUT_DOWN} };//下
 
 	m_inputMapTable[InputType::left] = { {InputCategory::keybd , KEY_INPUT_LEFT},
 											{InputCategory::pad , PAD_INPUT_LEFT} };//左
@@ -29,10 +29,10 @@ InputState::InputState()
 											{InputCategory::pad , PAD_INPUT_RIGHT} };//右
 
 	m_inputMapTable[InputType::leftroll] = {	{InputCategory::keybd , KEY_INPUT_Z},
-												{InputCategory::pad , PAD_INPUT_A} };
+												{InputCategory::pad , PAD_INPUT_A} };//A
 
 	m_inputMapTable[InputType::rightroll] = {	{InputCategory::keybd , KEY_INPUT_X},
-												{InputCategory::pad , PAD_INPUT_B} };
+												{InputCategory::pad , PAD_INPUT_B} };//B
 
 	//入力タイプの名前テーブルを作る
 	m_inputNameTable[InputType::next] = L"next";
