@@ -80,7 +80,7 @@ private:
 	//テトリミノがあったっているかどうか
 	bool TetriminoIsHit(int X, int Y, int type, int angle);
 	//テトリミノが回転したときにフィールド内にあるかどうか
-	void TetriminoIsField();
+	bool TetriminoIsField();
 	//テトリミノをリセットする
 	void ResetTetrimino();
 	
