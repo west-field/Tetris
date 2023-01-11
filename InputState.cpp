@@ -4,7 +4,8 @@
 InputState::InputState()
 {
 	m_inputMapTable[InputType::next] = { {InputCategory::keybd,KEY_INPUT_RETURN},
-										{InputCategory::pad,PAD_INPUT_R},//スタートボタン
+										//{InputCategory::pad,PAD_INPUT_R},//スタートボタン
+										{InputCategory::pad,PAD_INPUT_A},//A
 										{InputCategory::mouse,MOUSE_INPUT_LEFT} };
 
 	m_inputMapTable[InputType::prev] = { {InputCategory::keybd,KEY_INPUT_ESCAPE},
@@ -39,6 +40,8 @@ InputState::InputState()
 	m_inputNameTable[InputType::prev] = L"prev";
 	m_inputNameTable[InputType::pause] = L"pause";
 	m_inputNameTable[InputType::keyconf] = L"keyconf";
+	m_inputNameTable[InputType::leftroll] = L"右回転";
+	m_inputNameTable[InputType::rightroll] = L"左回転";
 
 	m_currentInput.resize(static_cast<int>(InputType::max));
 	m_lastInput.resize(static_cast<int>(InputType::max));

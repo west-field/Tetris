@@ -7,7 +7,6 @@
 #include "SceneManager.h"
 #include "GameplayingScene.h"
 #include "OptionScene.h"
-#include "PauseScene.h"
 
 namespace
 {
@@ -61,11 +60,6 @@ void TitleScene::NormalUpdat(const InputState& input)
 		Sound::Play(Sound::Determinant);
 		m_updateFunc = &TitleScene::FadeOutUpdat;
 	}
-	if (input.IsTriggered(InputType::prev))
-	{
-		m_manager.ChangeScene(new OptionScene(m_manager));
-		return;
-	}
 }
 
 void TitleScene::FadeOutUpdat(const InputState& input)
@@ -80,8 +74,7 @@ void TitleScene::FadeOutUpdat(const InputState& input)
 			m_manager.ChangeScene(new GameplayingScene(m_manager));
 			return;
 		case menuConfig:
-			m_updateFunc = &TitleScene::FadeInUpdat;
-			m_manager.PushScene(new PauseScene(m_manager));
+			m_manager.ChangeScene(new OptionScene(m_manager));
 			return;
 		case menuGameEnd:
 			m_manager.SetIsEnd();
