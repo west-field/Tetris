@@ -47,11 +47,6 @@ void GameplayingScene::NormalUpdat(const InputState& input)
 		m_updateFunc = &GameplayingScene::FadeOutUpdat;
 		m_fadeColor = 0xff0000;
 	}
-	if (input.IsTriggered(InputType::prev))
-	{
-		m_manager.ChangeScene(new TitleScene(m_manager));
-		return;
-	}
 	if (input.IsTriggered(InputType::pause))
 	{
 		m_manager.PushScene(new PauseScene(m_manager));
