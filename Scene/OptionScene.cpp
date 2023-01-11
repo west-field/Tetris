@@ -25,6 +25,10 @@ void OptionScene::Draw()
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	//枠線
 	DrawBox(kconfigStartX, kconfigStartY, kconfigStartX + kconfigWidth, kconfigStartY + kconfigHeight, 0xffffff, false);
+	
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
+	DrawTriangle(m_posX, m_posY, m_posX, m_posY + 20, m_posX + 10, m_posY + 10, 0xffffff, true);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	//メッセージ
 	SetFontSize(kFontSize);
 	DrawString(kconfigStartX+10, kconfigStartY+10, L"Option", 0xffff88);
@@ -67,13 +71,7 @@ void OptionScene::NormalUpdat(const InputState& input)
 		{
 			if (i == m_selectNum)
 			{
-				m_configMenu[i].x = kconfigStartX + 20;
-				m_configMenu[i].color = 0xAAD8E6;
-			}
-			else
-			{
-				m_configMenu[i].x = kconfigStartX + 10;
-				m_configMenu[i].color = 0xffffff;
+				m_posY = kPosY + 20 * i;
 			}
 		}
 	}

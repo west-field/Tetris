@@ -24,6 +24,10 @@ namespace
 	constexpr int kconfigStartY = (Game::kScreenHeight - kconfigHeight) / 2;
 
 	constexpr int kFontSize = 50;
+
+	constexpr int kPosX = kconfigStartX + 10;
+	constexpr int kPosY = kconfigStartY + kFontSize + 10;
+	
 }
 
 class InputState;
@@ -42,10 +46,12 @@ public:
 	void Draw();
 
 	ElementConfig m_configMenu[configMax] = {
-		{kconfigStartX + 20,kconfigStartY + kFontSize+10 + 20 * configKeyconfig,0xAAD8E6},
-		{kconfigStartX + 10,kconfigStartY + kFontSize+10 + 20 * configBack,0xffffff},
+		{kconfigStartX + 30,kconfigStartY + kFontSize+10 + 20 * configKeyconfig,0xffffff},
+		{kconfigStartX + 30,kconfigStartY + kFontSize+10 + 20 * configBack,0xffffff},
 	};
 	int m_selectNum = 0;
+	int m_posX = kPosX;
+	int m_posY = kPosY;
 private:
 	//フェードインの時のUpdate関数
 	void FadeInUpdat(const InputState& input);
