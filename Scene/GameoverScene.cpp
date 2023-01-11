@@ -63,13 +63,7 @@ GameoverScene::Draw()
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_fadeColor, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	//int X = Game::kScreenWidth  / 2 ;
-	//int  Y = Game::kScreenHeight  / 2 ;
 	SetFontSize(50);
 	DrawString(Game::kScreenWidth / 3, Game::kScreenHeight / 3, L"Gameover", 0xffffff);
-	////レベル表示
-	//DrawFormatString(X, Y, 0xffffff, L"Level %d", m_level);
-	////スコア表示
-	//DrawFormatString(X, Y + 50, 0xffffff, L"SCORE %d", m_point);
 	SetFontSize(0);
 }
