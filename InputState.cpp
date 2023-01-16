@@ -36,7 +36,7 @@ InputState::InputState()
 												{InputCategory::pad , PAD_INPUT_B} };//B
 
 	m_inputMapTable[InputType::hold] = { {InputCategory::keybd , KEY_INPUT_C},
-											{InputCategory::pad , PAD_INPUT_R} };//
+										{InputCategory::pad , PAD_INPUT_Y} };//左ショルダー
 
 	//入力タイプの名前テーブルを作る
 	m_inputNameTable[InputType::next] = L"next";
