@@ -21,9 +21,9 @@ struct LevelElement
 namespace
 {
 	constexpr int kLevelFontSize = 50;
-	constexpr int kPosX = 200;
-	constexpr int kMovePosX = kPosX - kLevelFontSize;
-	constexpr int kPosY = 150;
+	constexpr int kStartMenuPosX = 200;
+	constexpr int kMovePosX = kStartMenuPosX - kLevelFontSize;
+	constexpr int kStartMenuPosY = 150;
 }
 
 /// <summary>
@@ -50,9 +50,9 @@ private:
 	int m_selectLevel = 0;
 
 	LevelElement m_SelectLevel[Max] = {
-		{kMovePosX,kPosY},
-		{kPosX,kPosY + Normal * kLevelFontSize},
-		{kPosX,kPosY + Hard * kLevelFontSize}
+		{kMovePosX,kStartMenuPosY},
+		{kStartMenuPosX,kStartMenuPosY + Normal * kLevelFontSize},
+		{kStartMenuPosX,kStartMenuPosY + Hard * kLevelFontSize}
 	};
 
 	float m_count = 240.0f;

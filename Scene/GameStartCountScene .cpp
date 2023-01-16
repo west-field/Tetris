@@ -30,8 +30,8 @@ void GameStartCountScene::Draw()
 
 	if (m_isTuru)
 	{
-		DrawString(kPosX, kPosY - kLevelFontSize, L"ゲームレベル設定", 0xffffff);
-		DrawFormatString(kPosX + 200, kPosY - kLevelFontSize, 0xffffff, L"Level %d", 1 + m_selectLevel * 4);
+		DrawString(kStartMenuPosX, kStartMenuPosY - kLevelFontSize, L"ゲームレベル設定", 0xffffff);
+		DrawFormatString(kStartMenuPosX + 200, kStartMenuPosY - kLevelFontSize, 0xffffff, L"Level %d", 1 + m_selectLevel * 4);
 		//メニュー項目を描画
 		SetFontSize(kLevelFontSize);
 		DrawFormatString(m_SelectLevel[Easy].x, m_SelectLevel[Easy].y, 0xffffff, L"Easy");
@@ -79,7 +79,7 @@ void GameStartCountScene::NormalUpdat(const InputState& input)
 			}
 			else
 			{
-				m_SelectLevel[i].x = kPosX;//元の位置に戻す
+				m_SelectLevel[i].x = kStartMenuPosX;//元の位置に戻す
 			}
 		}
 	}
