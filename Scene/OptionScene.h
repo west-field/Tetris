@@ -4,6 +4,7 @@
 
 enum ItemConfig
 {
+	configOperate,
 	configKeyconfig,
 	configBack,
 
@@ -46,6 +47,7 @@ public:
 	void Draw();
 
 	ElementConfig m_configMenu[configMax] = {
+		{kconfigStartX + 30,kconfigStartY + kFontSize+10 + 20 * configOperate,0xffffff},
 		{kconfigStartX + 30,kconfigStartY + kFontSize+10 + 20 * configKeyconfig,0xffffff},
 		{kconfigStartX + 30,kconfigStartY + kFontSize+10 + 20 * configBack,0xffffff},
 	};

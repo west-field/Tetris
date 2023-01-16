@@ -20,7 +20,7 @@ void KeyConfigScene::Update(const InputState& input)
 	auto& configInput = const_cast<InputState&>(input);
 	if (!m_isEditing)
 	{
-		if (input.IsTriggered(InputType::keyconf))
+		if (input.IsTriggered(InputType::keyconf)|| input.IsTriggered(InputType::prev))
 		{
 			m_manager.PopScene();
 			return;

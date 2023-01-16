@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 #include "KeyConfigScene.h"
+#include "OperateScene.h"
 
 OptionScene::OptionScene(SceneManager& manager) : Scene(manager), m_updateFunc(&OptionScene::FadeInUpdat)
 {
@@ -33,6 +34,7 @@ void OptionScene::Draw()
 	SetFontSize(kFontSize);
 	DrawString(kconfigStartX+10, kconfigStartY+10, L"Option", 0xffff88);
 	SetFontSize(0);
+	DrawString(m_configMenu[configOperate].x, m_configMenu[configOperate].y, L"configOperate", m_configMenu[configOperate].color);
 	DrawString(m_configMenu[configKeyconfig].x, m_configMenu[configKeyconfig].y, L"KeyConfig", m_configMenu[configKeyconfig].color);
 	DrawString(m_configMenu[configBack].x, m_configMenu[configBack].y, L"–ß‚é", m_configMenu[configBack].color);
 
@@ -80,6 +82,9 @@ void OptionScene::NormalUpdat(const InputState& input)
 	{
 		switch (m_selectNum)
 		{
+		case configOperate:
+			m_manager.PushScene(new OperateScene(m_manager);
+			return;
 		case configKeyconfig:
 			m_manager.PushScene(new KeyConfigScene(m_manager, input));
 			return;
