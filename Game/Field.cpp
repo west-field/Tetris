@@ -38,6 +38,10 @@ Field::Field():m_updateFunc(&Field::NomalUpdate)
 	m_nextTetriminoX = m_startPosX + kTetriminoSize * kFieldWidthMax + kTetriminoSize * 3;
 	m_nextTetriminoY = m_startPosY + kTetriminoSize * 3;
 
+	m_holdTetriminoType = 0;
+	m_holdTetriminoX = Game::kScreenWidth / 5;
+	m_holdTetriminoY = Game::kScreenHeight / 6;
+
 	ResetTetrimino();
 }
 
@@ -105,6 +109,33 @@ void Field::Darw()
 		//枠線表示
 		DrawBox(X, Y, X + 140, Y + 130, 0xffffff, false);
 	}
+
+	//ホールドしているテトリミノを表示
+	{
+		if (!m_isFirstHold)
+		{
+			for (int y = 0; y < kTetriminoHeight; y++)
+			{
+				for (int x = 0; x < kTetriminoWidth; x++)
+				{
+					int X = m_holdTetriminoX + x * kTetriminoSize;
+					int Y = m_holdTetriminoY + y * kTetriminoSize;
+
+					if (m_tetrimino[m_holdTetriminoType][0][y][x])
+					{
+						DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_holdTetriminoType], true);
+					}
+				}
+			}
+		}
+		
+		//文字を表示
+		DrawString(m_holdTetriminoX, m_holdTetriminoY - 30, L"hold", 0xffffff);
+		int X = m_holdTetriminoX - 10;
+		int Y = m_holdTetriminoY - 30;
+		//枠線表示
+		DrawBox(X, Y, X + 140, Y + 130, 0xffffff, false);
+	}
 }
 
 void Field::NomalUpdate(const InputState& input)
@@ -149,6 +180,14 @@ void Field::NomalUpdate(const InputState& input)
 			m_rollTime = kRollTime;
 			if(!TetriminoIsField())m_angle--;
 			Sound::Play(Sound::BlockMove);
+		}
+	}
+
+	if (input.IsPressed(InputType::hold))
+	{
+		if(!m_isHold)
+		{
+			TetriminoHold();
 		}
 	}
 
@@ -367,24 +406,71 @@ bool Field::TetriminoIsField()
 		}
 	}
 
-	////ブロックを表示
-	//{
-	//	for (int y = 0; y < kFieldHeightMax; y++)
-	//	{
-	//		for (int x = 0; x < kFieldWidthMax; x++)
-	//		{
-	//			int X = m_startPosX + x * kTetriminoSize;
-	//			int Y = m_startPosY + y * kTetriminoSize;
-	//			//フィールドのテトリミノを表示
-	//			if (copy[y][x] != 0)
-	//			{
-	//				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
-	//				DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[copy[y][x]], true);
-	//				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-	//			}
-	//		}
-	//	}
-	//}
+	if (num == 4)
+	{
+		isok = true;
+	}
+
+	if (isok)
+	{
+		m_tetriminoAngle = angle;
+		TetriminoPos();
+		return true;
+	}
+	return false;
+}
+
+void Field::TetriminoHold()
+{
+	if (!TetriminoHoldIsField())
+	{
+		return;
+	}
+
+	int temp = m_holdTetriminoType;
+	m_holdTetriminoType = m_tetriminoType;
+	m_tetriminoType = temp;
+
+	if (m_isFirstHold)
+	{
+		m_isFirstHold = false;
+		ResetTetrimino();
+	}
+	m_isHold = true;
+}
+
+bool Field::TetriminoHoldIsField()
+{
+	int angle = m_angle % AngleMax;
+	int num = 0;
+	bool isok = false;
+	int copy[kFieldHeightMax][kFieldWidthMax] = {};
+
+	//フィールドにホールドしていたテトリミノを出す
+	for (int x = 0; x < kTetriminoWidth; x++)
+	{
+		for (int y = 0; y < kTetriminoHeight; y++)
+		{
+			if (m_tetrimino[m_holdTetriminoType][angle][y][x] != 0)
+			{
+				copy[m_tetriminoY + y][m_tetriminoX + x] = m_tetrimino[m_holdTetriminoType][angle][y][x];
+			}
+		}
+	}
+
+	for (int y = 0; y < kFieldHeightMax; y++)
+	{
+		for (int x = 0; x < kFieldWidthMax; x++)
+		{
+			if (copy[y][x] == 1)
+			{
+				if (m_field[y][x] == SPASE)
+				{
+					num++;
+				}
+			}
+		}
+	}
 
 	if (num == 4)
 	{
@@ -436,6 +522,9 @@ void Field::ResetTetrimino()
 	//表示する角度
 	m_tetriminoAngle = 0;
 	m_angle = AngleMax * 10;
+
+	//ホールドしたかどうかをfalseにする
+	m_isHold = false;
 }
 
 bool Field::GameOver()

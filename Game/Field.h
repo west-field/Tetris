@@ -81,6 +81,10 @@ private:
 	bool TetriminoIsHit(int X, int Y, int type, int angle);
 	//テトリミノが回転したときにフィールド内にあるかどうか
 	bool TetriminoIsField();
+	//テトリミノをホールドさせる
+	void TetriminoHold();
+	//テトリミノのホールド入れ替えを行ったとき壁に当たっているかどうか
+	bool TetriminoHoldIsField();
 	//テトリミノをリセットする
 	void ResetTetrimino();
 	
@@ -126,6 +130,7 @@ private:
 	int m_holdTetriminoY = 0;
 	//ホールドしたかどうか
 	bool m_isHold = false;
+	bool m_isFirstHold = true;
 
 	//横移動時間
 	float m_moveTime = kMoveTime;
