@@ -108,6 +108,7 @@ void
 TitleScene::Draw()
 {
 	//DrawExtendGraph(0, 0, Game::kScreenWidth - 1, Game::kScreenHeight - 1, m_bgH, true);
+	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, 0x87CEEB, true);
 	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);
 	//ƒƒjƒ…[€–Ú‚ğ•`‰æ
 	SetFontSize(kMenuFontSize);
