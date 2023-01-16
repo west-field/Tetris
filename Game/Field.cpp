@@ -480,26 +480,7 @@ bool Field::TetriminoHoldIsField()
 	if (isok)
 	{
 		m_tetriminoAngle = angle;
-		//表示するテトリミノをリセット
-		for (int y = 0; y < kFieldHeightMax; y++)
-		{
-			for (int x = 0; x < kFieldWidthMax; x++)
-			{
-				m_tetriminoMove[y][x] = 0;
-			}
-		}
-
-		//テトリミノの位置を決める
-		for (int x = 0; x < kTetriminoWidth; x++)
-		{
-			for (int y = 0; y < kTetriminoHeight; y++)
-			{
-				if (m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x] != 0)
-				{
-					m_tetriminoMove[m_tetriminoY + y][m_tetriminoX + x] = m_tetrimino[m_tetriminoType][m_tetriminoAngle][y][x];
-				}
-			}
-		}
+		TetriminoPos();
 		return true;
 	}
 	return false;
