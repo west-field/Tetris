@@ -119,6 +119,14 @@ private:
 	int m_nextTetriminoX = 0;
 	int m_nextTetriminoY = 0;
 
+	//ホールドしているテトリミノの種類
+	int m_holdTetriminoType = 0;
+	//ホールドしているテトリミノを表示する位置
+	int m_holdTetriminoX = 0;
+	int m_holdTetriminoY = 0;
+	//ホールドしたかどうか
+	bool m_isHold = false;
+
 	//横移動時間
 	float m_moveTime = kMoveTime;
 	//回転移動時間
