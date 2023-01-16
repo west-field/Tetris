@@ -18,6 +18,8 @@ enum class InputType
 	leftroll,//左回転
 	rightroll,//右回転
 
+	hold,//ホールド
+
 	max
 };
 
