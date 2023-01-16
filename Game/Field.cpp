@@ -98,29 +98,13 @@ void Field::Darw()
 				}
 			}
 		}
-
+		//文字を表示
 		DrawString(m_nextTetriminoX, m_nextTetriminoY - 30, L"next", 0xffffff);
+		int X = m_nextTetriminoX - 10;
+		int Y = m_nextTetriminoY - 30;
+		//枠線表示
+		DrawBox(X, Y, X + 140, Y + 130, 0xffffff, false);
 	}
-
-	//ゲームオーバー判定
-	/*{
-		for (int y = 0; y < 2; y++)
-		{
-			for (int x = 5; x < 5 + 4; x++)
-			{
-				int X = m_startPosX + x * kTetriminoSize;
-				int Y = m_startPosY + y * kTetriminoSize;
-
-				if (m_field[y][x] != SPASE)
-				{
-					DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[7], true);
-				}
-				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
-				DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[7], true);
-				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-			}
-		}
-	}*/
 }
 
 void Field::NomalUpdate(const InputState& input)

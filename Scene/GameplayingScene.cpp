@@ -84,11 +84,13 @@ GameplayingScene::Draw()
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_fadeColor, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	int X = (Game::kScreenWidth - 30 * 12) / 2 + 30 * 12 + 30 * 3;
-	int  Y = (Game::kScreenHeight - 30 * 23) / 2 + 30 * 8;
+	int X = Game::kScreenWidth / 4;
+	int Y = Game::kScreenHeight / 3;
 
 	//レベル表示
-	DrawFormatString(X, Y, 0xffffff, L"Level %d", m_level);
+	DrawFormatString(X, Y+10, 0xffffff, L"Level %d", m_level);
 	//スコア表示
-	DrawFormatString(X, Y+20, 0xffffff, L"SCORE %d", m_point);
+	DrawFormatString(X, Y+50, 0xffffff, L"SCORE %d", m_point);
+	//枠線表示
+	DrawBox(X - 10, Y, X-10 + 120, Y + 100, 0xffffff, false);
 }
