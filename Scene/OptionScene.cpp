@@ -83,7 +83,7 @@ void OptionScene::NormalUpdat(const InputState& input)
 		switch (m_selectNum)
 		{
 		case configOperate:
-			m_manager.PushScene(new OperateScene(m_manager);
+			m_manager.PushScene(new OperateScene(m_manager));
 			return;
 		case configKeyconfig:
 			m_manager.PushScene(new KeyConfigScene(m_manager, input));
