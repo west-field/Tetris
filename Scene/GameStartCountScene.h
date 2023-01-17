@@ -3,27 +3,27 @@
 
 class InputState;
 
-enum Level
-{
-	Easy,
-	Normal,
-	Hard,
-
-	Max
-};
-
-struct LevelElement
-{
-	int x;
-	int y;
-};
-
 namespace
 {
 	constexpr int kLevelFontSize = 50;
 	constexpr int kStartMenuPosX = 200;
 	constexpr int kMovePosX = kStartMenuPosX - kLevelFontSize;
 	constexpr int kStartMenuPosY = 150;
+
+	enum Level
+	{
+		Easy,
+		Normal,
+		Hard,
+
+		Max
+	};
+
+	struct LevelElement
+	{
+		int x;
+		int y;
+	};
 }
 
 /// <summary>

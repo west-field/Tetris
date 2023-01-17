@@ -2,21 +2,6 @@
 #include "Secne.h"
 #include "../game.h"
 
-enum Item
-{
-	pauseKeyconfig,
-	pauseBack,
-	pauseTitle,
-
-	pauseMax
-};
-
-struct Element
-{
-	int x, y;
-	int color;
-};
-
 namespace
 {
 	constexpr int pw_width = 400;
@@ -26,6 +11,21 @@ namespace
 
 	constexpr int kPosX = pw_start_x + 10;
 	constexpr int kPosY = pw_start_y + 30;
+
+	enum Item
+	{
+		pauseKeyconfig,
+		pauseBack,
+		pauseTitle,
+
+		pauseMax
+	};
+
+	struct Element
+	{
+		int x, y;
+		int color;
+	};
 }
 
 class InputState;

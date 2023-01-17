@@ -2,28 +2,28 @@
 #include "Secne.h"
 #include "../game.h"
 
-//メニュー項目
-enum MenuItem
-{
-	menuGameStart,	//ゲームスタート
-	menuOperation,	//操作説明
-	menuGameEnd,	//ゲーム終了
-
-	menuNum			//項目の数
-};
-//メニュー要素
-struct MenuElement
-{
-	int x;
-	int y;				//座標
-};
-
 namespace
 {
 	constexpr int kMenuFontSize = 50;//文字のサイズ
 	constexpr int kOriginalPosX = Game::kScreenWidth / 3 + kMenuFontSize;    //メニュー文字のx位置
 	constexpr int kOriginalPosY = Game::kScreenHeight / 2 + kMenuFontSize;    //メニュー文字のy位置
 	constexpr int kMovedPosX = kOriginalPosX - kMenuFontSize;//メニュー文字の移動したx位置
+
+	//メニュー項目
+	enum MenuItem
+	{
+		menuGameStart,	//ゲームスタート
+		menuOperation,	//操作説明
+		menuGameEnd,	//ゲーム終了
+
+		menuNum			//項目の数
+	};
+	//メニュー要素
+	struct MenuElement
+	{
+		int x;
+		int y;				//座標
+	};
 }
 
 class InputState;

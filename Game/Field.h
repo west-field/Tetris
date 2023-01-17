@@ -35,23 +35,23 @@ namespace
 	constexpr float kFallSpeed = 8.0f;
 	//上を押したとき落ちる時間が遅くなる
 	constexpr float kSlowlyFallTime = 0.5f;
-}
 
-//テトリミノの種類
-enum TetriminoType
-{
-	TypeI,TypeO,
-	TypeS,TypeZ,
-	TypeJ,TypeL,
-	TypeT,TypeMax
-};
-//テトリミノを回転させる角度
-enum TetriminoAngle
-{
-	Angle0,Angle90,
-	Angle180,Angle270,
-	AngleMax
-};
+	//テトリミノの種類
+	enum TetriminoType
+	{
+		TypeI, TypeO,
+		TypeS, TypeZ,
+		TypeJ, TypeL,
+		TypeT, TypeMax
+	};
+	//テトリミノを回転させる角度
+	enum TetriminoAngle
+	{
+		Angle0, Angle90,
+		Angle180, Angle270,
+		AngleMax
+	};
+}
 
 class Field
 {

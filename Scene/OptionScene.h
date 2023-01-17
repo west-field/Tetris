@@ -2,21 +2,6 @@
 #include "Secne.h"
 #include "../game.h"
 
-enum ItemConfig
-{
-	configOperate,
-	configKeyconfig,
-	configBack,
-
-	configMax
-};
-
-struct ElementConfig
-{
-	int x, y;
-	int color;
-};
-
 namespace
 {
 	constexpr int kconfigWidth = 500;
@@ -29,6 +14,20 @@ namespace
 	constexpr int kPosX = kconfigStartX + 10;
 	constexpr int kPosY = kconfigStartY + kFontSize + 10;
 	
+	enum ItemConfig
+	{
+		configOperate,
+		configKeyconfig,
+		configBack,
+
+		configMax
+	};
+
+	struct ElementConfig
+	{
+		int x, y;
+		int color;
+	};
 }
 
 class InputState;
