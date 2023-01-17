@@ -6,7 +6,7 @@
 #include "../DrawFunctions.h"
 #include "SceneManager.h"
 #include "GameplayingScene.h"
-#include "OptionScene.h"
+#include "OperateScene.h"
 
 namespace
 {
@@ -73,8 +73,8 @@ void TitleScene::FadeOutUpdat(const InputState& input)
 		case menuGameStart:
 			m_manager.ChangeScene(new GameplayingScene(m_manager));
 			return;
-		case menuConfig:
-			m_manager.ChangeScene(new OptionScene(m_manager));
+		case menuOperation:
+			m_manager.ChangeScene(new OperateScene(m_manager));
 			return;
 		case menuGameEnd:
 			m_manager.SetIsEnd();
@@ -113,7 +113,7 @@ TitleScene::Draw()
 	//メニュー項目を描画
 	SetFontSize(kMenuFontSize);
 	DrawFormatString(SelectMenu[menuGameStart].x, SelectMenu[menuGameStart].y, 0xffffff, L"ゲームスタート");
-	DrawFormatString(SelectMenu[menuConfig].x, SelectMenu[menuConfig].y, 0xffffff, L"設定");
+	DrawFormatString(SelectMenu[menuOperation].x, SelectMenu[menuOperation].y, 0xffffff, L"操作説明");
 	DrawFormatString(SelectMenu[menuGameEnd].x, SelectMenu[menuGameEnd].y, 0xffffff, L"ゲーム終了");
 	SetFontSize(0);
 
