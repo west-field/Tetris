@@ -23,6 +23,8 @@ namespace
 	constexpr int kTetriminoWidth = 4;
 	//テトリミノの大きさ
 	constexpr int kTetriminoSize = 30;
+	//テトリミノ画像の大きさ
+	constexpr int kTetriminoHSize = 30;
 
 	//横移動時間
 	constexpr float kMoveTime = 8.0f;
@@ -109,6 +111,8 @@ private:
 	int m_startPosX = 0;
 	int m_startPosY = 0;
 
+	//テトリミノの画像
+	int m_tetriminoH[TypeMax + 1] = { -1, -1 , -1 , -1 , -1 , -1 , -1 , -1 };
 	//テトリミノの種類
 	int m_tetriminoType = 0;
 	//テトリミノの角度

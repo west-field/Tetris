@@ -1,13 +1,15 @@
 #define SPASE -1
-#define WALL 8
+#define WALL 7
 
 #include "Field.h"
 #include <DxLib.h>
 #include <stdlib.h>
 #include <time.h>
+#include <cassert>
 #include "../game.h"
 #include "../Sound.h"
 #include "../InputState.h"
+#include "../DrawFunctions.h"
 
 Field::Field():m_updateFunc(&Field::NomalUpdate)
 {
@@ -43,11 +45,21 @@ Field::Field():m_updateFunc(&Field::NomalUpdate)
 	m_holdTetriminoY = Game::kScreenHeight / 6;
 
 	ResetTetrimino();
+
+	LoadDivGraph(L"Data/tetrimino.bmp", TypeMax+1, TypeMax+1, 1, kTetriminoHSize, kTetriminoHSize, m_tetriminoH);
+	for (auto& minoH : m_tetriminoH)
+	{
+		assert(minoH >= 0);
+	}
 }
 
 Field::~Field()
 {
-
+	for(auto& minoH : m_tetriminoH)
+	{
+		DeleteGraph(minoH);
+	}
+	
 }
 
 void Field::Update(const InputState& input)
@@ -73,14 +85,14 @@ void Field::Darw()
 				//フィールドのテトリミノを表示
 				if (m_field[y][x] != SPASE)
 				{
-					DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_field[y][x]], true);
+					DrawExtendGraph(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_tetriminoH[m_field[y][x]], true);
 				}
 				//テトリミノを表示
 				if (!m_isDeleteLine)
 				{
 					if (m_tetriminoMove[y][x] != 0)
 					{
-						DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_tetriminoType], true);
+						DrawExtendGraph(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_tetriminoH[m_tetriminoType], true);
 					}
 				}
 			}
@@ -98,7 +110,7 @@ void Field::Darw()
 
 				if (m_tetrimino[m_nextTetriminoType][0][y][x])
 				{
-					DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_nextTetriminoType], true);
+					DrawExtendGraph(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_tetriminoH[m_nextTetriminoType], true);
 				}
 			}
 		}
@@ -123,7 +135,7 @@ void Field::Darw()
 
 					if (m_tetrimino[m_holdTetriminoType][0][y][x])
 					{
-						DrawBox(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_color[m_holdTetriminoType], true);
+						DrawExtendGraph(X, Y, X + kTetriminoSize, Y + kTetriminoSize, m_tetriminoH[m_holdTetriminoType], true);
 					}
 				}
 			}
