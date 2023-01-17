@@ -107,7 +107,9 @@ void
 TitleScene::Draw()
 {
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, 0x87CEEB, true);//背景
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
 	DrawBoxAA(m_blockX, m_blockY, m_blockX + kBlockSize, m_blockY + kBlockSize, 0xFF0000, true);//動くブロック
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	DrawExtendGraph(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_bgH, true);//背景ブロック
 	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);//タイトル
 
