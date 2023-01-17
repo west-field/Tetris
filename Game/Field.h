@@ -18,9 +18,10 @@ namespace
 	constexpr int kFieldHeightMax = kFieldHeight + kFieldFloor + kFieldSpase;
 	constexpr int kFieldWidthMax = kFieldWidth + kFieldWall * 2;
 
-	//テトリミノの大きさ
+	//テトリミノ配列
 	constexpr int kTetriminoHeight = 4;
 	constexpr int kTetriminoWidth = 4;
+	//テトリミノの大きさ
 	constexpr int kTetriminoSize = 30;
 
 	//横移動時間
