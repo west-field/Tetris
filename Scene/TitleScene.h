@@ -8,6 +8,7 @@ namespace
 	constexpr int kOriginalPosX = Game::kScreenWidth / 3 + kMenuFontSize;    //メニュー文字のx位置
 	constexpr int kOriginalPosY = Game::kScreenHeight / 2 + kMenuFontSize;    //メニュー文字のy位置
 	constexpr int kMovedPosX = kOriginalPosX - kMenuFontSize;//メニュー文字の移動したx位置
+	constexpr float kBlockSize = Game::kScreenWidth / 20;//ブロックのサイズ
 
 	//メニュー項目
 	enum MenuItem
@@ -38,8 +39,8 @@ private:
 	int m_bgH = -1;
 
 	//ブロックの位置
-	float m_blockX = 0;
-	float m_blockY = 0;
+	float m_blockX = 0.0f;
+	float m_blockY = -kBlockSize;
 
 	//フェードインの時のUpdate関数
 	void FadeInUpdat(const InputState& input);

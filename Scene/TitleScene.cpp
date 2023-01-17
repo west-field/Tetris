@@ -8,11 +8,6 @@
 #include "GameplayingScene.h"
 #include "OperateScene.h"
 
-namespace
-{
-	
-}
-
 void TitleScene::FadeInUpdat(const InputState& input)
 {
 	//◇どんどん明るくなる
@@ -27,6 +22,11 @@ void TitleScene::FadeInUpdat(const InputState& input)
 void TitleScene::NormalUpdat(const InputState& input)
 {
 	m_blockY += 1.0f;
+	if (m_blockY >= Game::kScreenHeight)
+	{
+		m_blockY = -kBlockSize;
+	}
+
 	bool isPress = false;//キーが押されたかどうか
 	if (input.IsTriggered(InputType::down))
 	{
@@ -100,24 +100,23 @@ TitleScene::~TitleScene()
 void
 TitleScene::Update(const InputState& input)
 {
-	//◇メンバ関数ポインタを呼び出す　演算子　->*
 	(this->*m_updateFunc)(input);
 }
 
 void
 TitleScene::Draw()
 {
-	//DrawExtendGraph(0, 0, Game::kScreenWidth - 1, Game::kScreenHeight - 1, m_bgH, true);
-	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, 0x87CEEB, true);
-	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);
+	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, 0x87CEEB, true);//背景
+	DrawBoxAA(m_blockX, m_blockY, m_blockX + kBlockSize, m_blockY + kBlockSize, 0xFF0000, true);//動くブロック
+	DrawExtendGraph(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_bgH, true);//背景ブロック
+	DrawRotaGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 3, 6.0, 0.0, m_titleH, true, false);//タイトル
+
 	//メニュー項目を描画
 	SetFontSize(kMenuFontSize);
 	DrawFormatString(SelectMenu[menuGameStart].x, SelectMenu[menuGameStart].y, 0xffffff, L"ゲームスタート");
 	DrawFormatString(SelectMenu[menuOperation].x, SelectMenu[menuOperation].y, 0xffffff, L"操作説明");
 	DrawFormatString(SelectMenu[menuGameEnd].x, SelectMenu[menuGameEnd].y, 0xffffff, L"ゲーム終了");
 	SetFontSize(0);
-
-	//DrawBoxAA(m_blockX, m_blockY, m_blockX + 50.0f, m_blockY + 50.0f, 0xffffff, true);
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeValue);
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, 0x000000, true);
